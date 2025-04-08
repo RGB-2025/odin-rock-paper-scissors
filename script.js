@@ -1,3 +1,8 @@
+// initialization
+
+let humanScore = 0;
+let computerScore = 0;
+
 function getComputerChoice() {
     // Random value between 0-2 (inclusive)
     switch (Math.floor(Math.random() * 3)) {
@@ -14,5 +19,3 @@ function getHumanChoice() {
     let input = prompt("What do you pick?");
     return input;
 }
-
-console.log(getHumanChoice());

@@ -1,13 +1,10 @@
-// initialization
-
-let humanScore = 0;
-let computerScore = 0;
-
 // general functions
 
 function capitalize(text) {
     return text ? text.charAt(0).toUpperCase() + text.slice(1) : '';
 }
+
+// game functions
 
 function getComputerChoice() {
     // Random value between 0-2 (inclusive)
@@ -56,17 +53,60 @@ function playRound(humanChoice, computerChoice) {
     switch (getHumanWins(humanChoice, computerChoice)) {
         case true:
             console.log(`You win! ${humanChoice} beats ${computerChoice}`);
-            humanScore++;
-            return;
+            return 1;
         case false:
             console.log(`You lose! ${computerChoice} beats ${humanChoice}`);
-            computerScore++;
-            return;
+            return -1;
+
+        // Edge case: its not a valid move
         default:
             console.log('Invalid move! Please choose rock, paper, or scissors.');
+            return null;
     }
-    
-}const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
 
-playRound(humanSelection, computerSelection);
+    // new line
+    console.log();
+}
+
+function playGame() {
+    // initialization
+
+    let humanScore = 0;
+    let computerScore = 0;
+
+    for (let i = 0; i < 5; i++) {
+        // Randomize selections
+        let humanSelection = getHumanChoice();
+        let computerSelection = getComputerChoice();
+
+        let round = playRound(humanSelection, computerSelection);
+
+        // null means its invalid input
+        while (round === null) {
+            humanSelection = getHumanChoice();
+            computerSelection = getComputerChoice();
+            round = playRound(humanSelection, computerSelection);
+        }
+
+        // adds if wins or loses
+        if (round == 1) {humanScore++} else if (round == -1) {computerScore++}
+
+        console.log(`Score: ${humanScore} - ${computerScore}\n\n`)
+    }
+
+    console.log('\n\n\nGame Over!\n');
+
+    // check if its a draw
+    if (humanScore === computerScore) {
+        console.log(`It\'s a draw! Both have a score of ${humanScore}.`);
+        return;
+    }
+
+    if (humanScore > computerScore) {
+        console.log(`You win! Your score ${humanScore} beats ${computerScore}.`);
+    } else {
+        console.log(`The computer wins! The computer's score ${computerScore} beats ${humanScore}.`);
+    }
+}
+
+playGame();

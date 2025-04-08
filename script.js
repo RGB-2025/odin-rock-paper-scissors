@@ -1,4 +1,5 @@
 function getComputerChoice() {
+    // Random value between 0-2 (inclusive)
     switch (Math.floor(Math.random() * 3)) {
         case 0:
             return 'rock';
@@ -9,4 +10,9 @@ function getComputerChoice() {
     }
 }
 
-console.log(getComputerChoice())
+function getHumanChoice() {
+    let input = prompt("What do you pick?");
+    return input;
+}
+
+console.log(getHumanChoice());

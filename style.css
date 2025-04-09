@@ -1,3 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
 .hidden {
     display: none;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+    background-color: #03001C;
+    color: #B6EADA;
+
+    font-family: 'Nunito', Verdana, Geneva, Tahoma, sans-serif;
+}
+
+header, footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3%;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+header > *,
+footer > * {
+    margin: 0;
+}
+
+.game {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex: 1;
+}
+
+.results {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    gap: 3rem;
+    margin-bottom: 3rem;
+}
+
+.score.result > *,
+.game-over.result > * {
+    margin: 0.1rem 0;
+}
+
+#result {
+    font-style: italic;
+}
+
+.choices {
+    display: flex;
+    min-width: 50%;
+    justify-content: space-between;
+    gap: 5%;
+    flex-wrap: wrap;
+}
+
+.disabled {
+    background: rgb(3,0,28);
+    background: linear-gradient(0deg, rgba(3,0,28,1) 0%, rgba(35,22,74,1) 100%);
+    color: gray;
+}
+
+button {
+    background: rgb(3,0,28);
+    background: linear-gradient(0deg, rgba(3,0,28,1) 0%, rgba(48,30,103,1) 100%);
+    border: none;
+    border-radius: 16px;
+    padding: 16px;
+    color:white;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    font-family: 'Nunito', Verdana, Geneva, Tahoma, sans-serif;
+    user-select: none;
+}
+
+.choices button {
+    flex: 1;
+}
+
+button > * {
+    margin: 8px;
 }

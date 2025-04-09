@@ -3,28 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/604e80ecc8.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
     <title>Rock Paper Scisors</title>
     <script src="script.js" defer></script>
 </head>
 <body>
+    <header>
+        <h1>Rock Paper Scissors</h1>
+        <p>First to 5 points wins the game. Make your move.</p>
+    </header>
+
+
     <!--
         data-choice values:
         - Rock
         - Paper
         - Scissors
     -->
-    <div class="results-container">
-        <h1 id="game-over" class="hidden">Game Over!</h1>
+    
+    <div class="game">
+        <div class="results">
+            <div class="game-over result">
+                <h1 id="game-over" class="hidden">Game Over!</h1>
+                <p id="score-result"></p>
+            </div>
+            <div class="score result">
+                <h2>Score</h2>
+                <p id="score">
+                    <span id="player-score">0</span>
+                    -
+                    <span id="computer-score">0</span>
+                </p>
+            </div>
+        </div>
+        <div class="choices">
+            <button data-choice="Rock">
+                <i class="fa-solid fa-hand-back-fist fa-3x"></i>
+                <p>Rock</p>
+            </button>
+            <button data-choice="Paper">
+                <i class="fa-solid fa-hand fa-3x"></i>
+                <p>Paper</p>
+            </button>
+            <button data-choice="Scissors">
+                <i class="fa-solid fa-hand-scissors fa-3x"></i>
+                <p>Scissors</p>
+            </button>
+        </div>
         <p id="result"></p>
-        <p id="score">
-            <span id="player-score">0</span>
-            -
-            <span id="computer-score">0</span>
-        </p>
     </div>
-    <button data-choice="Rock">Rock</button>
-    <button data-choice="Paper"="">Paper</button>
-    <button data-choice="Scissors"="">Scissors</button>
+
+    <footer>
+        <button id="reset" class="hidden">Reset Game</button>
+        <p>Made by RGB25</p>
+    </footer>
 </body>
 </html>

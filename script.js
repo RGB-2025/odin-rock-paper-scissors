@@ -35,9 +35,11 @@ function processRound(playerChoice, computerChoice) {
 
 const buttons = document.querySelectorAll('[data-choice]');
 const result = document.getElementById('result');
+const scoreResult = document.getElementById('score-result');
 const playerScoreElement = document.getElementById('player-score');
 const computerScoreElement = document.getElementById('computer-score');
 const gameOverH1 = document.getElementById('game-over');
+const resetButton = document.getElementById('reset');
 
 let gameOver = false;
 let playerScore = 0;
@@ -71,11 +73,16 @@ function playRound(playerChoice) {
 
 function checkGameOver() {
     if (playerScore === 5 || computerScore === 5) {
-        gameOverH1.classList.remove('hidden')
-        result.textContent = playerScore === 5 ? 'Player Wins!' : 'Computer Wins!';
+        gameOverH1.classList.remove('hidden');
+        resetButton.classList.remove('hidden');
+        scoreResult.textContent = playerScore === 5 ? 'Player Wins!' : 'Computer Wins!';
+        buttons.forEach(button => button.classList.add('disabled'));
         gameOver = true;
     }
 }
 
 // for each button, if clicked playRound()
 buttons.forEach(button => button.addEventListener('click', () => playRound(button.dataset.choice)));
+
+// reset if clicked
+resetButton.addEventListener('click', () => location.reload());

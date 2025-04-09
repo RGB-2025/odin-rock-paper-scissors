@@ -109,4 +109,25 @@ function playGame() {
     }
 }
 
-playGame();
+
+let rockButton = document.getElementById('rock');
+let paperButton = document.getElementById('paper');
+let scissorsButton = document.getElementById('scissors');
+
+const buttons = [rockButton, paperButton, scissorsButton];
+
+buttons.forEach(button => {
+    button.addEventListener('click', () => {
+        let humanSelection = button.getAttribute('id');
+        let computerSelection = getComputerChoice();
+
+        let round = playRound(humanSelection, computerSelection);
+
+        // null means its invalid input
+        while (round === null) {
+            humanSelection = getHumanChoice();
+            computerSelection = getComputerChoice();
+            round = playRound(humanSelection, computerSelection);
+        }
+    })
+})

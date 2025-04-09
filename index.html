@@ -3,15 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Rock Paper Scisors</title>
     <script src="script.js" defer></script>
 </head>
 <body>
+    <!--
+        data-choice values:
+        - Rock
+        - Paper
+        - Scissors
+    -->
     <div class="results-container">
+        <h1 id="game-over" class="hidden">Game Over!</h1>
         <p id="result"></p>
+        <p id="score">
+            <span id="player-score">0</span>
+            -
+            <span id="computer-score">0</span>
+        </p>
     </div>
-    <button id="rock" data-choice="Rock">Rock</button>
-    <button id="paper" data-choice="Paper"="">Paper</button>
-    <button id="scissors" data-choice="Scissors"="">Scissors</button>
+    <button data-choice="Rock">Rock</button>
+    <button data-choice="Paper"="">Paper</button>
+    <button data-choice="Scissors"="">Scissors</button>
 </body>
 </html>

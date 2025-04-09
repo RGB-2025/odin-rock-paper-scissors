@@ -10,66 +10,72 @@ function getComputerChoice() {
     }
 }
 
-function getHumanWins(humanChoice, computerChoice) {
-    switch (humanChoice) {
-        case 'Rock':
-            // Rock beats Scissors
-            return computerChoice === 'Scissors' ? true : false;
-        case 'Paper':
-            // Paper beats Rock
-            return computerChoice === 'Rock' ? true : false;
-        case 'Scissors':
-            // Scissors beats Paper
-            return computerChoice === 'Paper' ? true : false;
-        default:
-            return null;
-    }
-}
 
-// Returns 0 if draw, 1 for human win and -1 for robot win. If not valid, return null
-function playRound(humanChoice, computerChoice) {
+// Returns 0 if draw, 1 for player win and -1 for robot win. If not valid, return null
+function processRound(playerChoice, computerChoice) {
     // Edge case: if both are the same, return draw
-    if (humanChoice === computerChoice) {
+    if (playerChoice === computerChoice) {
         return 0;
     }
-    switch (getHumanWins(humanChoice, computerChoice)) {
-        case true:
-            return 1;
-        case false:
-            return -1;
-        // Edge case: its not a valid move
+
+    switch (playerChoice) {
+        case 'Rock':
+            // Rock beats Scissors
+            return computerChoice === 'Scissors' ? 1 : -1;
+        case 'Paper':
+            // Paper beats Rock
+            return computerChoice === 'Rock' ? 1 : -1;
+        case 'Scissors':
+            // Scissors beats Paper
+            return computerChoice === 'Paper' ? 1 : -1;
         default:
             return null;
     }
 }
 
+const buttons = document.querySelectorAll('[data-choice]');
+const result = document.getElementById('result');
+const playerScoreElement = document.getElementById('player-score');
+const computerScoreElement = document.getElementById('computer-score');
+const gameOverH1 = document.getElementById('game-over');
 
-let rockButton = document.getElementById('rock');
-let paperButton = document.getElementById('paper');
-let scissorsButton = document.getElementById('scissors');
-let result = document.getElementById('result');
+let gameOver = false;
+let playerScore = 0;
+let computerScore = 0;
 
-const buttons = [rockButton, paperButton, scissorsButton];
+function playRound(playerChoice) {
+    if (gameOver) return;
 
-buttons.forEach(button => {
-    button.addEventListener('click', () => {
-        let humanChoice = button.getAttribute('data-choice');
-        let computerChoice = getComputerChoice();
+    const computerChoice = getComputerChoice();
 
-        let round = playRound(humanChoice, computerChoice);
-        switch (round) {
-            case 0:
-                result.textContent = `Its a draw! ${humanChoice} draws with ${computerChoice}`;
-                break;
-            case 1:
-                result.textContent = `You win! ${humanChoice} beats ${computerChoice}`;
-                break;
-            case -1:
-                result.textContent = `You lose! ${computerChoice} beats ${humanChoice}`;
-                break;
-            default:
-                alert('Invalid move!');
-                return;
-        }
-    })
-})
+    let round = processRound(playerChoice, computerChoice);
+    switch (round) {
+        case 0:
+            result.textContent = `Its a draw! ${playerChoice} draws with ${computerChoice}`;
+            break;
+        case 1:
+            result.textContent = `You win! ${playerChoice} beats ${computerChoice}`;
+            playerScoreElement.textContent = ++playerScore;
+            break;
+        case -1:
+            result.textContent = `You lose! ${computerChoice} beats ${playerChoice}`;
+            computerScoreElement.textContent = ++computerScore;
+            break;
+        default:
+            alert('Invalid move!');
+            return;
+    }
+
+    checkGameOver();
+}
+
+function checkGameOver() {
+    if (playerScore === 5 || computerScore === 5) {
+        gameOverH1.classList.remove('hidden')
+        result.textContent = playerScore === 5 ? 'Player Wins!' : 'Computer Wins!';
+        gameOver = true;
+    }
+}
+
+// for each button, if clicked playRound()
+buttons.forEach(button => button.addEventListener('click', () => playRound(button.dataset.choice)));
